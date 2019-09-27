@@ -17,9 +17,10 @@ export default {
   },
   data() {
     return {
-      verticalOffset: 0,
-      height: 0,
-      autoClose: 3000,
+      verticalOffset: 0, //具窗口底部的高度
+      height: 0, //组件本身的高度
+      autoClose: 3000, //自动消失的时间
+      visible: false,
     }
   },
 
@@ -40,7 +41,7 @@ export default {
       }
     },
     afterEnter() {
-      console.log('-------------afterEnter ' + this.$el.offsetHeight)
+      //只有动画播完才能获取到组件高度
       this.height = this.$el.offsetHeight
     },
     beforeDestory() {

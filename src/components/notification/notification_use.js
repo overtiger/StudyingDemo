@@ -1,13 +1,13 @@
 /**
- * 调用了扩展的Notification的组件func-notification
+ * 调用并实例化 扩展的Notification的组件notification_extend
  */
 import Vue from 'vue'
-import Component from './func-notification'
+import Component from './notification_extend'
 
 const notificationConstructor = Vue.extend(Component) //创建一个组件
 
 const instances = [] //保存创建的组件
-let seed = 1
+let seed = 1 //用来生成id
 
 const notify = (options) => {
   if (Vue.prototype.$isServer) return //如果是服务端渲染就直接返回，否则拿不到dom元素
@@ -18,6 +18,7 @@ const notify = (options) => {
     propsData: { ...rest },
     data: {
       autoClose: autoClose === undefined ? 3000 : autoClose,
+      visible: true,
     },
   })
 
@@ -25,12 +26,11 @@ const notify = (options) => {
   instance.id = id
   instance.vm = instance.$mount()
   document.body.appendChild(instance.vm.$el)
+  // instance.vm.visible = true    ---->写在这里也可以，写在instance创建的时候也行
 
-  //计算高度
+  //计算离窗口底部的高度，组件之间间隔为16
   let verticalOffset = 0
   instances.forEach((element) => {
-    // eslint-disable-next-line no-debugger
-    debugger
     verticalOffset += element.$el.offsetHeight + 16
   })
   verticalOffset += 16
@@ -44,8 +44,6 @@ const notify = (options) => {
   })
 
   instance.vm.$on('close', () => {
-    removeInsatance(instance)
-    document.body.removeChild(instance.vm.$el)
     instance.vm.visible = false
   })
 

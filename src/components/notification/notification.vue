@@ -36,7 +36,9 @@ export default {
       this.$emit('close')
     },
     afterEnter() {},
-    afterLeave() {},
+    afterLeave() {
+      this.$emit('closed')
+    },
   },
 }
 </script>
