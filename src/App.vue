@@ -14,16 +14,26 @@
         <span>content 3</span>
       </tab>
     </tabs>
+
+    <!-- <TodoList></TodoList> -->
+    <chat></chat>
   </div>
 </template>
 
 <script>
 import createApp from './create-app'
+// import TodoList from './components/tidoitem/components/App.vue'
+import chat from './components/chat/components/App.vue'
+
 export default {
   name: 'app',
   // components: {
   //   Notification,  createApp.js中引入了，这里不用再注册
   // },
+  components: {
+    // TodoList,
+    chat,
+  },
   data() {
     return {
       tabValue: '1',
