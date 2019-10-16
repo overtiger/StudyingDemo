@@ -19,8 +19,9 @@
         {{remaining | pluralize('item')}} left
       </span>
       <ul class="filters">
-        <li v-for="(val, key) in filters">
-          <a :href="'#/'+ key" :class="{selected: visibility === key}" @click="visibility = key">{{key | capitalize}}</a>
+        <li v-for="(val, key) in filtersMy" :key="key">
+          <span> · </span>
+          <a :href="'#/todoItem'" :class="{selected: visibility === key}" @click="visibility = key">{{key | capitalize}}</a>
         </li>
       </ul>
 
@@ -30,7 +31,7 @@
   </section>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import TodoItem from './TodoItem.vue'
 
 const filtersMy = {
@@ -49,9 +50,9 @@ export default {
     }
   },
   computed: {
-    todos() {
-      return this.$store.state.todos
-    },
+    ...mapState({
+      todos: (state) => state.todoStore.todos,
+    }),
     allChecked() {
       return this.todos.every((todo) => todo.done)
     },
@@ -64,15 +65,16 @@ export default {
   },
 
   methods: {
-    ...mapActions(['toggleAll', 'clearCompleted']),
+    ...mapActions({ toggleAll: 'todoStore/toggleAll', clearCompleted: 'todoStore/clearCompleted' }),
     addTodo(e) {
       const text = e.target.value
       if (text.trim()) {
-        this.$store.dispatch('addTodo', text)
+        this.$store.dispatch('todoStore/addTodo', text)
       }
       e.target.value = ''
     },
   },
+
   filters: {
     //自定义过滤器
     pluralize: (n, w) => (n === 1 ? w : w + 's'), //n指的是被过滤的对象remaining，w是字符串item。处理字符串item，只有一条todo时，就是item，否则是items
@@ -80,3 +82,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.filters li {
+  display: inline;
+}
+</style>

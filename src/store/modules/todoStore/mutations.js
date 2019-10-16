@@ -1,6 +1,6 @@
 // export const STORAGE_KEY = 'todo-vuejs'   用不到了
 
-export const mutations = {
+export default {
   addTodo(state, todo) {
     state.todos.push(todo)
   },

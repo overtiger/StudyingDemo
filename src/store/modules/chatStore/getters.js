@@ -7,6 +7,7 @@ export const currentThread = (state) => {
 
 //获取当前线程内的所有信息
 export const currentMessages = (state) => {
+  debugger
   const thread = currentThread(state)
   return thread && thread.messages ? thread.messages.map((id) => state.messages[id]) : []
 }
@@ -29,4 +30,12 @@ export const sortedMessages = (state, getters) => {
   //↑↑↑  这一句里面两个知识点，都是对数组的操作。slice()是分割，返回一个新的数组，
   //不影响原来的数组，这里没有参数，可以理解为复制。
   //sort()排序，第一个参数a的时间戳-第二个参数b的时间戳，如果返回值大于 0，则位置互换。如果返回值小于 0，则位置不变。
+}
+
+export default {
+  threads,
+  currentThread,
+  currentMessages,
+  unreadCount,
+  sortedMessages,
 }

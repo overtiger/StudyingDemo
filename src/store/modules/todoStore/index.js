@@ -1,12 +1,8 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
 import actions from './actions'
-// import { mutations, STORAGE_KEY } from './mutations'
-import { mutations } from './mutations'
+import mutations from './mutations'
 
-Vue.use(Vuex)
-
-export default new Vuex.Store({
+export default {
+  namespaced: true,
   state: {
     // todos: JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '[]'),
     //↑↑  这是官方的写法，要使用localStorage来存取，但是案例中只有get却没有set。
@@ -15,4 +11,4 @@ export default new Vuex.Store({
   },
   actions,
   mutations,
-})
+}

@@ -1,4 +1,4 @@
-import * as api from '../api'
+import * as api from '../../../components/chat/api'
 
 export const getAllMessages = ({ commit }) => {
   api.getAllMessage((message) => {
@@ -22,4 +22,12 @@ export const addThread = ({ commit }, { id, name }) => {
 
 export const removeThread = ({ commit }, id) => {
   commit('removeThread', id)
+}
+
+export default {
+  getAllMessages,
+  sendMessage,
+  switchThread,
+  addThread,
+  removeThread,
 }

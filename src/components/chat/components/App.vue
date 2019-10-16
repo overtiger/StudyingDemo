@@ -26,12 +26,12 @@ export default {
     ThreadSection,
     MessageSection,
   },
-  computed: mapGetters({ threads: 'threads' }),
+  computed: mapGetters({ threads: 'chatStore/threads' }),
   methods: mapActions({
     addThread(dispatch) {
       const id = 'm_' + Object.keys(this.threads).length
       const name = this.threadName
-      dispatch('addThread', { id, name })
+      dispatch('chatStore/addThread', { id, name })
       this.threadName = ''
     },
   }),

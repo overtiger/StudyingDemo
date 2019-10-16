@@ -15,12 +15,12 @@
 
 <script>
 import Thread from './Thread.vue'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'ThreadSection',
   components: { Thread },
-  computed: mapGetters(['threads', 'currentThread', 'unreadCount']),
-  methods: mapActions(['switchThread', 'removeThread']),
+  computed: mapGetters({ threads: 'chatStore/threads', unreadCount: 'chatStore/unreadCount', currentThread: 'chatStore/currentThread' }),
+  methods: mapActions({ switchThread: 'chatStore/switchThread', removeThread: 'chatStore/removeThread' }),
 }
 </script>

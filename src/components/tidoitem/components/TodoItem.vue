@@ -31,7 +31,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['editTodo', 'toggleTodo', 'removeTodo']), //在action中定义的方法
+    ...mapActions({ editTodo: 'todoStore/editTodo', toggleTodo: 'todoStore/toggleTodo', removeTodo: 'todoStore/removeTodo' }), //在action中定义的方法
     doneEdit(e) {
       //完成编辑
       const value = e.target.value.trim()

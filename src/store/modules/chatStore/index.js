@@ -1,10 +1,10 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import * as getters from './getters'
-import * as actions from './actions'
+// import Vue from 'vue'
+// import Vuex from 'vuex'
+import getters from './getters'
+import actions from './actions'
 import mutations from './mutations'
 
-Vue.use(Vuex)
+// Vue.use(Vuex)
 
 const state = {
   currentThreadID: null, //当前线程ID，用来获取当前线程
@@ -33,9 +33,10 @@ const state = {
   },
 }
 
-export default new Vuex.Store({
+export default {
+  namespaced: true,
   state,
   getters,
   actions,
   mutations,
-})
+}

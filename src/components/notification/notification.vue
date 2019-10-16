@@ -35,6 +35,7 @@ export default {
       e.preventDefault()
       this.$emit('close')
     },
+    //下面是动画效果触发的方法
     afterEnter() {},
     afterLeave() {
       this.$emit('closed')

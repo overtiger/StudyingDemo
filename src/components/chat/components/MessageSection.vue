@@ -22,7 +22,7 @@ export default {
       text: '',
     }
   },
-  computed: mapGetters({ thread: 'currentThread', messages: 'sortedMessages' }),
+  computed: mapGetters({ thread: 'chatStore/currentThread', messages: 'chatStore/sortedMessages' }),
   watch: {
     'thread.latestMessage': function() {
       this.$nextTick(() => {
@@ -35,7 +35,7 @@ export default {
     sendMessage(dispatch) {
       const { text, thread } = this
       if (text.trim()) {
-        dispatch('sendMessage', {
+        dispatch('chatStore/sendMessage', {
           text,
           thread,
         })
