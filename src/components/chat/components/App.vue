@@ -26,7 +26,7 @@ export default {
     ThreadSection,
     MessageSection,
   },
-  computed: mapGetters({ threads: 'chatStore/threads' }),
+  computed: mapGetters({ threads: 'chatStore/threads' }), //这里threads是别名
   methods: mapActions({
     addThread(dispatch) {
       const id = 'm_' + Object.keys(this.threads).length

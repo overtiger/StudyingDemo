@@ -33,6 +33,7 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import TodoItem from './TodoItem.vue'
+import { STORAGE_KEY } from '@/store/modules/todoStore/mutations'
 
 const filtersMy = {
   //三个按钮，每个按钮对应不同的过滤条件
@@ -63,7 +64,15 @@ export default {
       return this.todos.filter((todo) => !todo.done).length
     },
   },
-
+  watch: {
+    todos: {
+      handler: function(val, oldVal) {
+        console.log('--------------')
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(val)) //放到localStorage里，刷新页面之后还有
+      },
+      deep: true, //加deep才能监听到嵌套属性变化
+    },
+  },
   methods: {
     ...mapActions({ toggleAll: 'todoStore/toggleAll', clearCompleted: 'todoStore/clearCompleted' }),
     addTodo(e) {
